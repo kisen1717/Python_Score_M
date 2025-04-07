@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  app:
+    build: ./app
+    container_name: app_server
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    networks:
+      - mahjong-net
+    environment:
+      DB_HOST: db
+      DB_USER: user
+      DB_PASSWORD: password
+      DB_NAME: mahjong
+
+  db:
+    image: mysql:8
+    container_name: db_server
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mahjong
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+    networks:
+      - mahjong-net
+      
+
+  batch:
+    build: ./batch
+    container_name: batch_server
+    depends_on:
+      - db
+    networks:
+      - mahjong-net
+
+networks:
+  mahjong-net:
+
+volumes:
+  db-data:
