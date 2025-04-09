@@ -31,7 +31,6 @@ services:
     networks:
       - mahjong-net
       
-
   batch:
     build: ./batch
     container_name: batch_server

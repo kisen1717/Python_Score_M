@@ -2,5 +2,6 @@ Flask
 gunicorn
 mysql-connector-python
 flask
+Flask-Login
 flask-mysqldb
 bcrypt
