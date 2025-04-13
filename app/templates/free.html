@@ -1,1 +1,45 @@
-なまな
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mahjong Performance Management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        {% if current_user.is_authenticated %}
+            <p>ようこそ{{ current_user.username }} さん</p>
+            <h1>まあじゃん成績管理</h1>
+            <h2>着順記録</h2>
+
+            <form action="#" method="post" onsubmit="return onsubmit="return confirmAction();">
+                <select name="rank" id="rank" required>
+                    <option value="">--着順を選択--</option>
+                    <option value="1">1着</option>
+                    <option value="2">2着</option>
+                    <option value="3">3着</option>
+                    <option value="4">4着</option>
+                </select>
+                <br>
+                <button type="submit">着順登録</button>
+                <br><br>
+                <li><a href="/logout">成績管理画面へ</a></li>
+            </form>
+
+        {% else %}
+            <h1>認証エラーしました。<br>ログアウトして下さい。</h1>
+            <nav>
+                <ul>
+                    <li><a href="/logout">ログアウト</a></li>
+                </ul>
+            </nav>
+        {% endif %}
+    </header>
+
+    <footer>
+        <p>&copy; 2025 Mahjong Performance Management</p>
+    </footer>
+
+    </body>
+</html>
