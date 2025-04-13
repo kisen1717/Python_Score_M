@@ -9,24 +9,25 @@
 <body>
     <header>
         {% if current_user.is_authenticated %}
-            <p>ようこそ、{{ current_user.username }} さん</p>
+            <p>ようこそ{{ current_user.username }} さん</p>
             <h1>まあじゃん成績管理</h1>
+　　　　　　　<h2>モード選択</h2>
+　　　　　　　<ul>
+                <li><a href="/free">フリー成績管理</a></li>
+　　　　　　　　　<li><a href="/set">セット成績記録</a></li>
+            </ul>
         {% else %}
-            <h1>エラー</h1>
-        {% endif %}
-    </header>
-    
+　　　　　　　<h1>認証エラーしました。
+               <br>ログアウトして下さい。</br>
+            </h1>
+
     <nav>
-        <ul>
-            <li><a href="/login">ログイン</a></li>
-        </ul>
+
+            <ul>
+            <li><a href="/logout">ログアウト</a></li>
+            </ul>
     </nav>
-
-    <section>
-        <h2>概要</h2>
-        <p>このアプリケーションは、あなたの麻雀の成績を管理をするのに役立ちます。ゲームプレイのトラッキング用の異なるモードにアクセスできます。</p>
-    </section>
-
+    </header>
     <footer>
         <p>&copy; 2025 Mahjong Performance Management</p>
     </footer>
