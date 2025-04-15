@@ -55,6 +55,8 @@ def login():
         user = cursor.fetchone()
 
         if user:  # ユーザーが存在すればホームページにリダイレクト
+            user_obj = User(user[0], user[1])  # DB から取得したユーザー情報をUserクラスに設定
+            login_user(user_obj)  # ユーザーをログイン状態にする
             return redirect(url_for("home"))
         else:
             flash("ユーザー名、パスワードを再入力してください", "error")
@@ -74,6 +76,7 @@ def logout():
 @app.route("/")
 @login_required  # ログインが必要なページ
 def home():
+    print(f"Current User: {current_user}")  # デバッグ用
     return render_template("home.html")
 
 if __name__ == "__main__":
