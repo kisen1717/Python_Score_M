@@ -13,9 +13,11 @@ def admin_ search(mysql):
     jannsou_list = cursor.fetchall() 
 
     if request.method == "POST":
+        
+        #画面から日付の終わりと始まりと雀荘を取得
         start_date = request.form.get("start_date")
         end_date = request.form.get("end_date")
-　　　　　jannsou_name = 
+　　　　　jannsou_name = request.form.get("jannsou")
         # 入力チェック：start_dateと end_dateと jannsou_name が選択されていなければエラーメッセージを表示
         if not start_date or not jannsou_name or not end_date:
             flash("日付または雀荘を選択してください", "error")
@@ -24,7 +26,7 @@ def admin_ search(mysql):
         user = current_user.username
 
         # free_results_all から平均着順を算出
-            query = "SELECT average_rank FROM free_results WHERE username = %s AND jannsou_name "
+            query = "SELECT rank FROM free_results WHERE username = %s AND jannsou_name "
         cursor.execute(query, (user,jannsou_name))
         @mysql.connection.commit()
         @flash("登録完了", "success")
