@@ -5,15 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mahjong Performance Management</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="{{ url_for('static', filename='free.js') }}" defer></script>
 </head>
 <body>
     <header>
         {% if current_user.is_authenticated %}
-            <p>ようこそ{{ current_user.username }} さん</p>
+            <p>ようこそ、{{current_user.username }} さん</p>
             <h1>まあじゃん成績管理</h1>
             <h2>着順記録</h2>
 
-            <form action="#" method="post" onsubmit="return onsubmit="return confirmAction();">
+            <form action="{{ url_for('free') }}" method="post" onsubmit="return confirmAction();">
                 <select name="rank" id="rank" required>
                     <option value="">--着順を選択--</option>
                     <option value="1">1着</option>
@@ -21,10 +22,12 @@
                     <option value="3">3着</option>
                     <option value="4">4着</option>
                 </select>
-                <br>
-                <button type="submit">着順登録</button>
                 <br><br>
-                <li><a href="/logout">成績管理画面へ</a></li>
+                <button type="submit">着順登録</button><br>
+                <br>
+                <footer>
+                    <li><a href="/logout">成績管理画面へ</a></li><br><br>
+                </footer>
             </form>
 
         {% else %}
@@ -38,8 +41,10 @@
     </header>
 
     <footer>
+    	{% if current_user.is_authenticated %}
+        <li><a href="{{ url_for('logout') }}">ログアウト</a></li>
+    {% endif %}
         <p>&copy; 2025 Mahjong Performance Management</p>
     </footer>
-
-    </body>
+</body>
 </html>

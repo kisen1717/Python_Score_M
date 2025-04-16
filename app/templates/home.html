@@ -7,25 +7,31 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <header>
+    <header1>
         {% if current_user.is_authenticated %}
             <p>ようこそ、{{ current_user.username }} さん</p>
             <h1>まあじゃん成績管理</h1>
+            
+            <h2>モード選択</h2>
+            <ul><br></br>
+                <li1><a href="/free">フリー成績管理</a></li1><br></br>
+                <li2><a href="/set">セット成績記録</a></li2><br></br>
+            </ul>
+            
         {% else %}
-            <h1>ようこそ！ログインしてください</h1>
+            <h1>認証エラーしました。<br>ログアウトして下さい。</h1>
+            	<nav>
+                    <ul>
+                    	<li><a href="/logout">ログアウト</a></li>
+                	</ul>
+            	</nav>
+            
         {% endif %}
-    </header>
-    
-    <nav>
-        <ul>
-            <li><a href="/login">ログイン</a></li>
-        </ul>
-    </nav>
+    </header1>
 
-    <section>
-        <h2>概要</h2>
+    <section2>
         <p>このアプリケーションは、あなたの麻雀の成績を管理をするのに役立ちます。ゲームプレイのトラッキング用の異なるモードにアクセスできます。</p>
-    </section>
+    </section2>
 
     <footer>
         <p>&copy; 2025 Mahjong Performance Management</p>

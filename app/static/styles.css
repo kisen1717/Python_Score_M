@@ -1,0 +1,68 @@
+/* 全体の背景 */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9; /* 明るい背景色 */
+    color: #333; /* ダークグレーの文字色 */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center; /* 横方向中央 */
+    align-items: center; /* 縦方向中央 */
+    height: 100vh; /* ビューポートの高さに合わせる */
+    width: 100%; /* 横幅100% */
+    box-sizing: border-box;
+    flex-direction: column;
+}
+
+/* ulリストをかっこよく */
+ul {
+    list-style: none; /* デフォルトのリストアイコンを消す */
+    padding: 0;
+    margin: 0;
+    width: 100%; /* リストが横幅いっぱいに広がる */
+    background: linear-gradient(to right, #336ae0, #336ae0); /* 緑のグラデーション背景 */
+    border-radius: 8px; /* 角を丸く */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* ボックスシャドウで浮き上がる効果 */
+    overflow: hidden; /* 子要素がはみ出さないように */
+}
+
+/* liアイテム */
+ul li {
+    display: flex; /* フレックスボックスを使用 */
+    justify-content: center; /* 横方向中央揃え */
+    align-items: center; /* 縦方向中央揃え */
+    padding: 12px 20px; /* アイテムに余白 */
+    border-bottom: 1px solid #ddd; /* アイテム間の仕切り線 */
+    font-size: 16px; /* フォントサイズ */
+    color: white; /* 文字色を白に */
+    transition: background-color 0.3s ease; /* 背景色の変化にアニメーション */
+}
+
+ul li:last-child {
+    border-bottom: none; /* 最後のアイテムには仕切り線を付けない */
+}
+
+/* アイテムのホバー時のスタイル */
+ul li:hover {
+    background-color: #388e3c; /* ホバー時に背景色を変更 */
+    cursor: pointer; /* ポインターを変更 */
+}
+
+/* フラッシュメッセージのスタイル */
+.flash {
+    padding: 10px;
+    font-size: 14px;
+    margin-top: 20px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.flash.error {
+    background-color: #f44336;
+    color: white;
+}
+
+.flash.success {
+    background-color: #4caf50;
+    color: white;
+}
