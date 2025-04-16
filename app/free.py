@@ -13,13 +13,19 @@ def handle_free(mysql):
     jannsou_list = cursor.fetchall()  # → [(1, '○○荘'), (2, '△△荘')]
 
     if request.method == "POST":
-        rank = request.form["rank"]
-        jannsou_id = request.form["jannsou"]  # 選択された雀荘のIDを取得
+        rank = request.form.get("rank")
+        jannsou_name = request.form.get("jannsou")  # 選択された雀荘の名前を取得
+
+        # 入力チェック：rank と jannsou_name が選択されていなければエラーメッセージを表示
+        if not rank or not jannsou_name:
+            flash("着順または雀荘を選択してください", "error")
+            return redirect(url_for("free"))
+        
         user = current_user.username
 
-        # free_results_all にデータを挿入
+        # free_results_all にデータを挿入（名前を保存）
         query = "INSERT INTO free_results_all (username, juni, jansou) VALUES (%s, %s, %s)"
-        cursor.execute(query, (user, rank, jannsou_id))
+        cursor.execute(query, (user, rank, jannsou_name))
         mysql.connection.commit()
         flash("登録完了", "success")
         return redirect(url_for("free"))

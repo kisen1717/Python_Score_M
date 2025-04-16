@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理画面 - Mahjong Performance Management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>管理画面</h1>
+        <p>{{ username }} さん、ようこそ！</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>条件を指定して成績を検索</h2>
+            <form action="{{ url_for('admin') }}" method="get">
+                <table>
+                    <tr>
+                        <td><label for="jansou">雀荘:</label></td>
+                        <td>
+                            <select name="jansou" id="jansou">
+                                <option value="">--選択してください--</option>
+                                {% for jansou in jannsou_list %}
+                                    <option value="{{ jansou[1] }}" {% if jansou[1] == request.args.get('jansou') %}selected{% endif %}>{{ jansou[1] }}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="start_date">開始日:</label></td>
+                        <td><input type="date" name="start_date" id="start_date" value="{{ request.args.get('start_date') }}"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="end_date">終了日:</label></td>
+                        <td><input type="date" name="end_date" id="end_date" value="{{ request.args.get('end_date') }}"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: left;">
+                            <button name="average" id="average" type="submit">条件別平均着順</button>
+                        </td>
+                    </tr>
+                </table>
+                <button name="all_average" id="all_average" required　type="submit">平均着順</button>
+            </form>
+        </section>
+        <section>
+            <h2>検索結果</h2>
+            {% if results %}
+            <table border="1" style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <th>雀荘</th>
+                        <th>着順</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for result in results %}
+                        <tr>
+                            <td>{{ result.jansou }}</td>
+                            <td>{{ result.juni }}</td>
+                            <td>{{ result.timestamp }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+                <p>検索結果がありません。</p>
+            {% endif %}
+        </section>
+
+        <section>
+            <a href="{{ url_for('logout') }}">ログアウト</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Mahjong Performance Management</p>
+    </footer>
+</body>
+</html>

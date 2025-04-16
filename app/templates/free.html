@@ -33,13 +33,20 @@
     <br><br>
 
     <label for="jannsou">雀荘を選択：</label>
-    <select name="jannsou" id="jannsou" required>
+     <select name="jannsou" id="jannsou" required>
         <option value="">--雀荘を選択--</option>
         {% for jannsou in jannsou_list %}
-            <option value="{{ jannsou[0] }}">{{ jannsou[1] }}</option>
+            <option value="{{ jannsou[1] }}">{{ jannsou[1] }}</option>  <!-- jannsou[1] は名前 -->
         {% endfor %}
     </select>
 
     <br><br>
     <button type="submit">着順登録</button>
 </form>
+
+<br>
+</br>
+      <li3><a href="/admin">成績管理管理画面</li3>
+<br>
+</br>
+

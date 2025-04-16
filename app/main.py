@@ -81,21 +81,21 @@ def home():
 # フリーのページ
 @app.route("/free", methods=["GET", "POST"])
 @login_required
-
 def free():
     if request.method == "POST":
         # フォームから送信された着順を変数に格納
         rank = request.form["rank"]
         # フォームから送信されたusenameを変数に格納
-        user = current_user.username
-        # 変数に格納された値をデバッグ用に表示（ログやコンソールに出力）
-        #print(f"送信された着順: {rank}")
-        #print(f"送信されたname: {user}")
-
-    
+        user = current_user.username  
     return handle_free(mysql)  # ← free.py の関数を呼ぶ
     
     return render_template("free.html", username=current_user.username)
+
+@app.route("/admin")
+@login_required
+def admin():
+    # 管理画面のテンプレートを表示
+    return render_template("admin.html", username=current_user.username)
 
 
 
