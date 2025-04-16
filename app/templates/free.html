@@ -1,50 +1,45 @@
-<!DOCTYPE html>
-<html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mahjong Performance Management</title>
+    <title>Login - Mahjong Performance Management</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    <script src="{{ url_for('static', filename='free.js') }}" defer></script>
 </head>
 <body>
     <header>
         {% if current_user.is_authenticated %}
-            <p>ようこそ、{{current_user.username }} さん</p>
-            <h1>まあじゃん成績管理</h1>
-            <h2>着順記録</h2>
-
-            <form action="{{ url_for('free') }}" method="post" onsubmit="return confirmAction();">
-                <select name="rank" id="rank" required>
-                    <option value="">--着順を選択--</option>
-                    <option value="1">1着</option>
-                    <option value="2">2着</option>
-                    <option value="3">3着</option>
-                    <option value="4">4着</option>
-                </select>
-                <br><br>
-                <button type="submit">着順登録</button><br>
-                <br>
-                <footer>
-                    <li><a href="/logout">成績管理画面へ</a></li><br><br>
-                </footer>
-            </form>
-
+            <p>ようこそ、{{ current_user.username }} さん</p>
         {% else %}
             <h1>認証エラーしました。<br>ログアウトして下さい。</h1>
-            <nav>
-                <ul>
-                    <li><a href="/logout">ログアウト</a></li>
-                </ul>
-            </nav>
+            	<nav>
+                    <ul>
+                    	<li><a href="/logout">ログアウト</a></li>
+                	</ul>
+            	</nav>
+            
         {% endif %}
     </header>
+     <h1>麻雀成績管理</h1>
+<form action="{{ url_for('free') }}" method="post" onsubmit="return confirmAction();">
+    <label for="rank">着順：</label>
+    <select name="rank" id="rank" required>
+        <option value="">--着順を選択--</option>
+        <option value="1">1着</option>
+        <option value="2">2着</option>
+        <option value="3">3着</option>
+        <option value="4">4着</option>
+    </select>
 
-    <footer>
-    	{% if current_user.is_authenticated %}
-        <li><a href="{{ url_for('logout') }}">ログアウト</a></li>
-    {% endif %}
-        <p>&copy; 2025 Mahjong Performance Management</p>
-    </footer>
-</body>
-</html>
+    <br><br>
+
+    <label for="jannsou">雀荘を選択：</label>
+    <select name="jannsou" id="jannsou" required>
+        <option value="">--雀荘を選択--</option>
+        {% for jannsou in jannsou_list %}
+            <option value="{{ jannsou[0] }}">{{ jannsou[1] }}</option>
+        {% endfor %}
+    </select>
+
+    <br><br>
+    <button type="submit">着順登録</button>
+</form>
