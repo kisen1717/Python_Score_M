@@ -26,10 +26,17 @@ def admin_ search(mysql):
         user = current_user.username
 
         # free_results_all から平均着順を算出
-            query = "SELECT rank FROM free_results WHERE username = %s AND jannsou_name "
-        cursor.execute(query, (user,jannsou_name))
-        @mysql.connection.commit()
-        @flash("登録完了", "success")
+            query1 = "SELECT juni FROM free_results_all WHERE username = %s AND jannsou_name = %s BETWEEN %s AND %S "
+            query2 = "SELECT COUNT juni FROM free_results_all WHERE username = %s AND jannsou_name = %s "
+            
+        cursor.execute(query1, (user, jannsou_name, start_date, end_date))
+        #計算
+        
+        
+        
+        
+        
+        #最後にこれ↓
         @return redirect(url_for("free"))
 
     cursor.close()
