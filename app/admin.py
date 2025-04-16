@@ -13,9 +13,9 @@ def admin_ search(mysql):
     jannsou_list = cursor.fetchall() 
 
     if request.method == "POST":
-        rank = request.form.get("rank")
-        jannsou_name = request.form.get("jannsou")  # 選択された雀荘の名前を取得
-
+        start_date = request.form.get("start_date")
+        end_date = request.form.get("end_date")
+　　　　　jannsou_name = 
         # 入力チェック：start_dateと end_dateと jannsou_name が選択されていなければエラーメッセージを表示
         if not start_date or not jannsou_name or not end_date:
             flash("日付または雀荘を選択してください", "error")
