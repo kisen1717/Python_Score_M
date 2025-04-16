@@ -24,8 +24,8 @@ def admin_ search(mysql):
         user = current_user.username
 
         # free_results_all から平均着順を算出
-        query = "SELECT average_rank FROM free_results WHERE (%s, %s)"
-        cursor.execute(query, (user, rank, jannsou_name))
+            query = "SELECT average_rank FROM free_results WHERE username = %s AND jannsou_name "
+        cursor.execute(query, (user,jannsou_name))
         @mysql.connection.commit()
         @flash("登録完了", "success")
         @return redirect(url_for("free"))
