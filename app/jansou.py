@@ -1,7 +1,7 @@
 from flask import render_template, request, redirect, url_for, flash
 from flask_login import login_required, current_user
 
-def admin_search(mysql):
+def insert_jansou(mysql):
     cursor = mysql.connection.cursor()
     user = current_user.username
 
@@ -55,4 +55,5 @@ def admin_search(mysql):
         start_date=start_date,
         end_date=end_date,
         results=results,
+        
     )

@@ -3,7 +3,10 @@ import os
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_mysqldb import MySQL
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
-from free import handle_free  # ← 追加
+from free import handle_free  # ←追加
+from admin import admin_search  # ←追加
+from jansou import insert_jansou  # ←追加
+
 
 app = Flask(__name__) 
 app.secret_key = 'your_secret_key'
@@ -83,21 +86,28 @@ def home():
 @login_required
 def free():
     if request.method == "POST":
-        # フォームから送信された着順を変数に格納
-        rank = request.form["rank"]
         # フォームから送信されたusenameを変数に格納
         user = current_user.username  
     return handle_free(mysql)  # ← free.py の関数を呼ぶ
     
     return render_template("free.html", username=current_user.username)
 
-@app.route("/admin")
+#管理画面
+@app.route("/admin", methods=["GET", "POST"])
 @login_required
 def admin():
-    # 管理画面のテンプレートを表示
-    return render_template("admin.html", username=current_user.username)
+    return admin_search(mysql)
+    #return render_template("admin.html", username=current_user.username)
+    
+#雀荘登録画面
+@app.route("/jansou", methods=["GET", "POST"])
+@login_required
+def jansou():
+    user = current_user.username
+    return insert_jansou(mysql)
+    #return render_template("admin.html", username=current_user.username)
 
-
-
+    
+#いじらない
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)

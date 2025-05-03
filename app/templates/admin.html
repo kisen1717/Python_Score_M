@@ -8,14 +8,14 @@
 </head>
 <body>
     <header>
-        <h1>管理画面</h1>
-        <p>{{ username }} さん、ようこそ！</p>
+        <h1>麻雀成績管理画面</h1>
+        <p>{{ username }} さん、成績を見ておきましょう</p>
     </header>
 
     <main>
         <section>
             <h2>条件を指定して成績を検索</h2>
-            <form action="{{ url_for('admin') }}" method="get">
+            <form action="{{ url_for('admin') }}" method="post">
                 <table>
                     <tr>
                         <td><label for="jansou">雀荘:</label></td>
@@ -37,7 +37,7 @@
                         <td><input type="date" name="end_date" id="end_date" value="{{ request.args.get('end_date') }}"></td>
                     </tr>
                     <tr>
-                        <td colspan="2" style="text-align: left;">
+                        <td colspan="2" style="text-align: left;    ">
                             <button name="average" id="average" type="submit">条件別平均着順</button>
                         </td>
                     </tr>
@@ -47,31 +47,26 @@
         </section>
         <section>
             <h2>検索結果</h2>
-            {% if results %}
             <table border="1" style="width: 100%; border-collapse: collapse;">
                 <thead>
                     <tr>
                         <th>雀荘</th>
-                        <th>着順</th>
+                        <th>平均着順</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for result in results %}
                         <tr>
-                            <td>{{ result.jansou }}</td>
-                            <td>{{ result.juni }}</td>
-                            <td>{{ result.timestamp }}</td>
+                            <td style="text-align: center;">{{ selected_jannsou }}</td>
+                            <td style="text-align: center;">{{ avg }}</td>
                         </tr>
-                    {% endfor %}
+                    
                 </tbody>
             </table>
-            {% else %}
-                <p>検索結果がありません。</p>
-            {% endif %}
         </section>
 
         <section>
-            <a href="{{ url_for('logout') }}">ログアウト</a>
+            <li1></li1><a href="/free">・フリー成績入力フォーム</a></li1><br>
+            <a href="{{ url_for('logout') }}">・ログアウト</a><br>
         </section>
     </main>
 

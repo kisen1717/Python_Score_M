@@ -26,6 +26,28 @@ ul {
     overflow: hidden; /* 子要素がはみ出さないように */
 }
 
+
+form {
+    text-align: center;  /* 親要素にテキストセンターを適用 */
+}
+
+button {
+    display: block;
+    margin: 0 auto;  /* ボタンを中央に配置 */
+    padding: 10px 20px;  /* ボタンにパディングを追加して見た目を調整 */
+    font-size: 16px;  /* フォントサイズの調整 */
+    background-color: #4CAF50;  /* 背景色 */
+    color: white;  /* テキストカラー */
+    border: none;  /* 枠線なし */
+    border-radius: 5px;  /* 角丸 */
+    cursor: pointer;  /* カーソルをポインタに変更 */
+}
+
+button:hover {
+    background-color: #45a049;  /* ホバー時の色変更 */
+}
+
+
 /* liアイテム */
 ul li {
     display: flex; /* フレックスボックスを使用 */
