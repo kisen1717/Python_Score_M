@@ -3,55 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Mahjong Performance Management</title>
+    <title>フリー成績入力 - Mahjong Performance Management</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles_free.css') }}">
+    <style>
+        body {
+            margin: 0;
+            font-family: sans-serif;
+            background-color: #2c3e50;
+            color: white;
+        }
+        .navbar {
+            background-color: #007B9E;
+            overflow: hidden;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            background-color: #005f73;
+        }
+        .navbar a.active {
+            background-color: #005073;
+        }
+        .content {
+            padding: 40px 20px;
+            text-align: center;
+        }
+        label, span {
+            color: black;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #2c3e50;
+            color: white;
+        }
+        input[type="text"] {
+            padding: 6px;
+            margin-left: 10px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 30px;
+            background-color: #3498db;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        {% if current_user.is_authenticated %}
-            <p>ようこそ、{{ current_user.username }} さん</p>
-        {% else %}
+    {% if current_user.is_authenticated %}
+        <header>
+            <div class="navbar">
+                <a href="/free" class="active">フリー成績管理</a>
+                <a href="/set">セット成績記録</a>
+                <a href="/admin">成績管理画面</a>
+                <a href="/jansou">雀荘登録</a>
+                <a href="/logout">ログアウト</a>
+            </div>
+            <h1 style="padding-left: 5px; font-size: 16px;">ようこそ、{{ current_user.username }} さん</h1>
+            <h2 style="padding-left: 10px;">成績を記録</h2>
+
+            <div class="main_txt" style="text-align: left; font-size: 16px; line-height: 1.8; margin: 0 auto; max-width: 600px;">
+                <p style="text-align: center;">
+                    <strong>成績を記録してちょ</strong>
+                </p>
+                <form action="{{ url_for('free') }}" method="post" onsubmit="return confirmAction();">
+                    <label for="rank">着順：</label>
+                    <select name="rank" id="rank" required>
+                        <option value="">--着順を選択--</option>
+                        <option value="1">1着</option>
+                        <option value="2">2着</option>
+                        <option value="3">3着</option>
+                        <option value="4">4着</option>
+                    </select>
+                    <label for="jannsou">雀荘を選択：</label>
+                    <select name="jannsou" id="jannsou" required>
+                        <option value="">--雀荘を選択--</option>
+                        {% for jannsou in jannsou_list %}
+                            <option value="{{ jannsou[1] }}">{{ jannsou[1] }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit">着順登録</button>
+                </form>
+            </div>
+        </header>
+        </div>
+    {% else %}
+        <header>
             <h1>認証エラーしました。<br>ログアウトして下さい。</h1>
-            	<nav>
-                    <ul>
-                    	<li><a href="/logout">ログアウト</a></li>
-                	</ul>
-            	</nav>
-            
-        {% endif %}
-    </header>
-     <h1>フリー成績入力フォーム</h1>
-<form action="{{ url_for('free') }}" method="post" onsubmit="return confirmAction();">
-    <label for="rank">着順：</label>
-    <select name="rank" id="rank" required>
-        <option value="">--着順を選択--</option>
-        <option value="1">1着</option>
-        <option value="2">2着</option>
-        <option value="3">3着</option>
-        <option value="4">4着</option>
-    </select>
-
-    <br><br>
-
-    <label for="jannsou">雀荘を選択：</label>
-     <select name="jannsou" id="jannsou" required>
-        <option value="">--雀荘を選択--</option>
-        {% for jannsou in jannsou_list %}
-            <option value="{{ jannsou[1] }}">{{ jannsou[1] }}</option>  <!-- jannsou[1] は名前 -->
-        {% endfor %}
-    </select>
-
-    <br><br>
-    <button type="submit">着順登録</button>
-</form>
-
-<br>
-      <li><a href="/admin">成績管理管理画面</li>
-</br>
-<br>
-
-      <li><a href="/jansou">雀荘登録フォーム</a></li>
-</br>
+            <nav>
+                <a href="/logout">ログアウト</a>
+            </nav>
+        </header>
+    {% endif %}
+    <footer style="text-align:center; margin-top: 40px;">
+        <p>&copy; 2025 Mahjong Performance Management</p>
+    </footer>
+    <script>
+        function confirmAction() {
+            return confirm('この内容で登録しますか？');
+        }
+    </script>
+</body>
 </html>
-
-

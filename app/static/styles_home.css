@@ -78,21 +78,3 @@ footer {
     bottom: 0;
     width: 100%;
 }
-
-/* ログアウトリンク（他と統一した色） */
-a[href*="logout"] {
-    display: block;
-    text-align: center;
-    margin: 2rem auto;
-    width: fit-content;
-    padding: 0.5rem 1rem;
-    background-color: #27ae60;  /* 緑系に統一 */
-    color: white;
-    text-decoration: none;
-    border-radius: 6px;
-    transition: background-color 0.3s ease;
-}
-
-a[href*="logout"]:hover {
-    background-color: #2ecc71;
-}

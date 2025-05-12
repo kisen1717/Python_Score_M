@@ -5,11 +5,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>管理画面 - Mahjong Performance Management</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles_admin.css') }}">
+    <style>
+        body {
+            margin: 0;
+            font-family: sans-serif;
+            background-color: #2c3e50;
+            color: white;
+        }
+        .navbar {
+            background-color: #007B9E;
+            overflow: hidden;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            background-color: #005f73;
+        }
+        .navbar a.active {
+            background-color: #005073;
+        }
+        .content {
+            padding: 40px 20px;
+            text-align: center;
+        }
+        label, span {
+            color: black;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #2c3e50;
+            color: white;
+        }
+        input[type="text"] {
+            padding: 6px;
+            margin-left: 10px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 30px;
+            background-color: #3498db;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>麻雀成績管理画面</h1>
-        <p>{{ username }}の情けない成績</p>
+        <div class="navbar">
+            <a href="/free">フリー成績記録</a>
+            <a href="/set">セット成績記録</a>
+            <a href="/jansou">雀荘登録</a>
+            <a href="/logout">ログアウト</a>
+        </div>
+        <h1 style="padding-left: 5px;">{{ current_user.username }} の成績</h1>
     </header>
 
     <main>
@@ -36,38 +99,29 @@
                         <td><label for="end_date">終了日:</label></td>
                         <td><input type="date" name="end_date" id="end_date" value="{{ request.args.get('end_date') }}"></td>
                     </tr>
-                    <tr>
-                        <td colspan="2" style="text-align: left;    ">
-                            <button name="average" id="average" type="submit">条件別平均着順</button>
-                        </td>
-                    </tr>
                 </table>
-                <button name="all_average" id="all_average" required type="submit">平均着順</button>
             </form>
+            <button name="average" id="average" type="submit">条件別平均着順</button><br>
+            <button name="all_average" id="all_average" required type="submit">平均着順</button>
         </section>
         <section>
-            <h2>検索結果</h2>
-            <table border="1" style="width: 100%; border-collapse: collapse;">
+            <h2 style="color: white;">検索結果</h2>
+            <table border="1" style="width: 100%; border-collapse: collapse; background-color: white; color: black;">
                 <thead>
                     <tr>
-                        <th>雀荘</th>
-                        <th>平均着順</th>
+                        <th style="padding: 8px; text-align: center; background-color: white; color: black;">雀荘</th>
+                        <th style="padding: 8px; text-align: center; background-color: white; color: black;">平均着順</th>
                     </tr>
                 </thead>
                 <tbody>
-                        <tr>
-                            <td style="text-align: center;">{{ selected_jannsou }}</td>
-                            <td style="text-align: center;">{{ avg }}</td>
-                        </tr>
-                    
+                    <tr>
+                        <td style="text-align: center; padding: 8px;">{{ selected_jannsou }}</td>
+                        <td style="text-align: center; padding: 8px;">{{ avg }}</td>
+                    </tr>
                 </tbody>
             </table>
         </section>
-
-        <section>
-            <li1></li1><a href="/free">・フリー成績入力フォーム</a></li1><br>
-            <a href="{{ url_for('logout') }}">・ログアウト</a><br>
-        </section>
+        
     </main>
 
     <footer>

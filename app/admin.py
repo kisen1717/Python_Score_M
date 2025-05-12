@@ -18,10 +18,6 @@ def admin_search(mysql):
         start_date = request.form.get("start_date")
         end_date = request.form.get("end_date")
         selected_jannsou = request.form.get("jansou")
-        
-        print("start_date:", start_date)
-        print("end_date:", end_date)
-        print("selected_jannsou:", selected_jannsou)
 
         if not start_date or not end_date or not selected_jannsou:
             flash("日付または雀荘を選択してください", "error")
@@ -55,4 +51,5 @@ def admin_search(mysql):
         start_date=start_date,
         end_date=end_date,
         results=results,
+        
     )

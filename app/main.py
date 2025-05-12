@@ -100,13 +100,10 @@ def admin():
     #return render_template("admin.html", username=current_user.username)
     
 #雀荘登録画面
-@app.route("/jansou", methods=["GET", "POST"])
-@login_required
-def jansou():
-    user = current_user.username
+@app.route("/jansou", methods=["GET", "POST"], endpoint="jansou")
+def jansou_route():
     return insert_jansou(mysql)
-    render_template("jansou.html")
-    #return render_template("admin.html", username=current_user.username)
+
 
     
 #いじらない
