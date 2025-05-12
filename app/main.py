@@ -17,7 +17,7 @@ login_manager.init_app(app)
 login_manager.login_view = 'login'
 
 # MySQL 設定（環境変数がない場合はデフォルトを使用）
-app.config['MYSQL_HOST'] = os.getenv('DB_HOST', 'localhost')
+app.config['MYSQL_HOST'] = os.getenv('DB_HOST', 'db_server')
 app.config['MYSQL_USER'] = os.getenv('DB_USER', 'user')
 app.config['MYSQL_PASSWORD'] = os.getenv('DB_PASSWORD', 'password')
 app.config['MYSQL_DB'] = os.getenv('DB_NAME', 'mahjong')
