@@ -1,0 +1,98 @@
+/* ベース設定 */
+body {
+    font-family: 'Helvetica Neue', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #2c3e50;
+    color: #333;
+}
+
+/* ヘッダー */
+header {
+    background-color: #2c3e50;
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0.5rem 0;
+    font-size: 2rem;
+    text-align: left;
+}
+
+header p1 {
+    margin: 0.5rem 0;
+    font-size: 2rem;
+    text-align: left;
+}
+
+header p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+/* ナビゲーション */
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 1rem auto;
+    text-align: center;
+}
+
+li {
+    margin: 0.5rem 0;
+}
+
+li a {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    background-color: #27ae60;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+li a:hover {
+    background-color: #2ecc71;
+}
+
+/* セクション */
+section {
+    max-width: 500px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+/* フッター */
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #34495e;
+    color: white;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+/* ログアウトリンク（他と統一した色） */
+a[href*="logout"] {
+    display: block;
+    text-align: center;
+    margin: 2rem auto;
+    width: fit-content;
+    padding: 0.5rem 1rem;
+    background-color: #27ae60;  /* 緑系に統一 */
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+
+a[href*="logout"]:hover {
+    background-color: #2ecc71;
+}

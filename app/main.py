@@ -105,6 +105,7 @@ def admin():
 def jansou():
     user = current_user.username
     return insert_jansou(mysql)
+    render_template("jansou.html")
     #return render_template("admin.html", username=current_user.username)
 
     

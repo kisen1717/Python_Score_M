@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>管理画面 - Mahjong Performance Management</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles_admin.css') }}">
 </head>
 <body>
     <header>
         <h1>麻雀成績管理画面</h1>
-        <p>{{ username }} さん、成績を見ておきましょう</p>
+        <p>{{ username }}の情けない成績</p>
     </header>
 
     <main>
@@ -42,7 +42,7 @@
                         </td>
                     </tr>
                 </table>
-                <button name="all_average" id="all_average" required　type="submit">平均着順</button>
+                <button name="all_average" id="all_average" required type="submit">平均着順</button>
             </form>
         </section>
         <section>

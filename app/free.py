@@ -10,7 +10,7 @@ def handle_free(mysql):
     # ユーザーの雀荘リスト取得
     user = current_user.username
     cursor.execute("SELECT id, name FROM free_jannsou WHERE username = %s", (user,))
-    jannsou_list = cursor.fetchall()  # → [(1, '○○荘'), (2, '△△荘')]
+    jannsou_list = cursor.fetchall() 
 
     if request.method == "POST":
         rank = request.form.get("rank")

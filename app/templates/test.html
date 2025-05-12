@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}麻雀の頂{% endblock %}</title>
+    <style>
+        body { margin: 0; font-family: sans-serif; }
+        .navbar {
+            background-color: #007B9E;
+            overflow: hidden;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            background-color: #005f73;
+        }
+        .navbar a.active {
+            background-color: #005073;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="{{ url_for('home') }}" class="{% if request.path == '/' %}active{% endif %}">HOME</a>
+        <a href="#">麻雀の頂：雀記とは</a>
+        <a href="{{ url_for('register') }}">新規登録について</a>
+        <a href="{{ url_for('jansou') }}">機能サンプル</a>
+        <a href="#">符計算</a>
+    </div>
+
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

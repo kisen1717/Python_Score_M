@@ -1,12 +1,24 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Mahjong Performance Management</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>雀荘登録フォーム</title>
+</head>
 <body>
-    <section>
-        <h1>雀荘登録</h1>
-    </section>
+    <h1>雀荘登録</h1>
+    
+    {% if current_user.is_authenticated %}
+        <p>ようこそ、{{ current_user.username }} さん</p>
+    {% endif %}
+    <body>
+        <section>
+            <form action="{{ url_for('jansou') }}" method="POST">
+                <div>
+                    <label for="username">雀荘： </label>
+                    <input type="text" id="username" name="username" required>
+                </div><br>
+                <div>
+    
+
+    <a href="{{ url_for('free') }}">フリーモード</a>
 </body>
+</html>
