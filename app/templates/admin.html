@@ -106,6 +106,45 @@
         </section>
         <section>
             <h2 style="color: white;">検索結果</h2>
+            
+            {% if chart_data %}
+<canvas id="rankingChart" width="400" height="400"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const ctx = document.getElementById('rankingChart').getContext('2d');
+  const data = {
+    labels: {{ chart_data|map(attribute="label")|list|tojson }},
+    datasets: [{
+      data: {{ chart_data|map(attribute="value")|list|tojson }},
+      backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0'],
+    }]
+  };
+
+  const config = {
+    type: 'pie',
+    data: data,
+    options: {
+      plugins: {
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              const percent = {{ chart_data|map(attribute="percent")|list|tojson }};
+              const index = context.dataIndex;
+              return `${data.labels[index]}: ${data.datasets[0].data[index]}回 (${percent[index]}%)`;
+            }
+          }
+        }
+      }
+    }
+  };
+
+  new Chart(ctx, config);
+</script>
+{% endif %}
+
+            
+            
+            
             <table border="1" style="width: 100%; border-collapse: collapse; background-color: white; color: black;">
                 <thead>
                     <tr>
