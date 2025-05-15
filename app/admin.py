@@ -35,15 +35,34 @@ def admin_search(mysql):
         juni_list = [row[0] for row in rows]
 
         if juni_list:
+            #着順作成
             avg = sum(juni_list) / len(juni_list)
             results = [{"juni": j, "jansou": selected_jannsou} for j in juni_list]
+            
+            #円グラフ作成
+            from collections import Counter
+            counter = Counter(juni_list)
+            total = len(juni_list)
+            chart_data = [
+                {
+                    "label": f"{i}位",
+                    "value": counter.get(str(i), 0),
+                    "percent": round(counter.get(str(i), 0) / total * 100, 1)
+                }
+                #4回のループ指定
+                for i in range(1, 5)
+            ]
+            
+            
         else:
             flash("該当するデータがありません", "info")
 
     cursor.close()
 
     return render_template(
-        "admin.html",
+        "admin.html", 
+        #円グラフ要素
+        chart_data=chart_data,
         username=user,
         jannsou_list=jannsou_list,
         avg=avg,
@@ -51,5 +70,4 @@ def admin_search(mysql):
         start_date=start_date,
         end_date=end_date,
         results=results,
-        
     )
